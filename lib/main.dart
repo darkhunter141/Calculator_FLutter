@@ -11,8 +11,6 @@ void main () {
 
 class mainpage extends StatelessWidget {
 
-  const mainpage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

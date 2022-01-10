@@ -16,55 +16,43 @@ class _screenaState extends State<screena> {
   double historyFontSize = 38.0;
   double resultFontSize = 48.0;
 
-
   void rnf(String buttonText) {
     print(buttonText);
     setState(() {
-      if(buttonText == "AC"){
+      if (buttonText == "AC") {
         history = "0";
         result = "0";
         historyFontSize = 38.0;
         resultFontSize = 48.0;
-      }
-
-      else if(buttonText == "⌫"){
+      } else if (buttonText == "⌫") {
         historyFontSize = 48.0;
         resultFontSize = 38.0;
         history = history.substring(0, history.length - 1);
-        if(history == ""){
+        if (history == "") {
           history = "0";
         }
-      }
-      else if(buttonText == "="){
+      } else if (buttonText == "=") {
         expression = history;
 
         expression = expression.replaceAll('X', '*');
         expression = expression.replaceAll('÷', '/');
-        expression = expression.replaceAll("%","/100");
+        expression = expression.replaceAll("%", "/100");
 
-
-        try{
+        try {
           Parser p = Parser();
           Expression exp = p.parse(expression);
 
           ContextModel cm = ContextModel();
           result = '${exp.evaluate(EvaluationType.REAL, cm)}';
-        }catch(e){
+        } catch (e) {
           result = "Error";
         }
-
-      }
-
-
-      else{
-
+      } else {
         historyFontSize = 48.0;
         resultFontSize = 38.0;
-        if(history == "0"){
-
+        if (history == "0") {
           history = buttonText;
-        }else {
-
+        } else {
           history = history + buttonText;
         }
       }
@@ -73,13 +61,12 @@ class _screenaState extends State<screena> {
 
   @override
   Widget build(BuildContext context) {
-
     var hei = MediaQuery.of(context).size.height;
     var wid = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             Container(
               height: hei / 3.4,
@@ -90,25 +77,25 @@ class _screenaState extends State<screena> {
                       bottomRight: Radius.circular(20)),
                   color: Color(0xFFCDE6E6)),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(7.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
                         alignment: Alignment.centerRight,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-
-                              child: Text("$history", style: TextStyle(fontSize: 50))),
+                              scrollDirection: Axis.horizontal,
+                              child: Text("$history",
+                                  style: TextStyle(fontSize: 50))),
                         )),
                     SizedBox(
                       height: hei / 40,
                     ),
                     Container(
                         alignment: Alignment.centerRight,
-                        child: Text("$result", style: TextStyle(fontSize:40)))
+                        child: Text("$result", style: TextStyle(fontSize: 40)))
                   ],
                 ),
               ),
@@ -117,7 +104,7 @@ class _screenaState extends State<screena> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(7.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -132,7 +119,7 @@ class _screenaState extends State<screena> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(7.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -145,7 +132,7 @@ class _screenaState extends State<screena> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(7.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -158,7 +145,7 @@ class _screenaState extends State<screena> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(7.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -171,7 +158,7 @@ class _screenaState extends State<screena> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(7.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
